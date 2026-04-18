@@ -1,7 +1,14 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('app.urls')),
+    # Submit exam for a specific course
+    path('<int:course_id>/submit/', views.submit_exam, name='submit_exam'),
+
+    # Show exam result for a submission
+    path(
+        'course/<int:course_id>/submission/<int:submission_id>/result/',
+        views.show_exam_result,
+        name='show_exam_result'
+    ),
 ]
